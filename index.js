@@ -1,8 +1,14 @@
 var tmi = require("tmi.js")
-var channel = "seu usuario"
+var channel = "gabrieldarezzo"
 // seu codigo 
 // get yours at http://twitchapps.com/tmi
-var senha = require("./codigoauth.js")
+var configGlobal = require("./password.js")
+
+var adms = [
+  channel,  
+  'darezzobot',  
+];
+
 
 var config = {
   options: {
@@ -13,10 +19,8 @@ var config = {
     reconnect: true
   },
   identity: {
-    username: "seu nome",
-    // get yours at http://twitchapps.com/tmi
-    // abaixo eu crieu um module export que emporta a senha 
-    password: senha.senha 
+    username: "darezzobot",        
+    password: configGlobal.password // get yours at http://twitchapps.com/tmi
   },
   // nome do meu canal
   channels: [channel]
@@ -29,46 +33,51 @@ client.on("connected", (address, port) => {
 })
 
 client.on("chat", (channel, user, message, self) => {
-  if( message === "oi" ) {
-    client.say(channel, "oi conta a boa :D")
-  }
+  
   if(message === 'paaa') {
     let meBan = `a proxima é ban!`;
-    client.timeout(channel, `${user['display-name']}` , 5, meBan)
+    client.timeout(channel, `]${user['display-name']}` , 5, meBan)
       .then((data) => {
         // data returns [channel, username, seconds, reason]a
-      }).catch((err) => {
-        //
+      }).catch((err) => {        
         console.log("Nao");
       });
   }
-  if(message === 'mod') {
-    client.mod(channel, 'nightbot')
+
+  //função pra saber se é mod
+  function isMod(usuario, adms, client) {
+    if(!adms.includes(usuario)) {
+      client.say(channel, 'você não tem permissão!');
+      return false;
+    }   
+    return true
+  }
+  
+
+  if(message === 'tt') {
+    console.log()
+  }
+
+  if(message === 'log') {
+    let debbug = isMod(user['display-name'], adms, client);
+    console.log(user['display-name'], {
+      'isMod': debbug
+    });
+  }
+
+
+  if(message === 'sci') {
+    isMod(user['display-name'], adms, client);
+    client.action(channel, "!game Science & Technology")
       .then((data) => {
-        client.say(channel, "Voce ativou o nightbot como moderador do canal!");
+        console.log('troca feita com sucesso!');
       }).catch((err) => {
+        console.log('error ao tentar trocar de cateogria');
       });
   }
-  //função pra saber se é mod
-  function isMod(usuario) {
-    if(usuario === client.mods(channel)) 
-      return true;
-    else 
-      return false;
-  }
-  if(message === 'sci') {
-    if(isMod(`${user['display-name']}`)) 
-      client.action(channel, "!game Science & Technology")
-        .then((data) => {
-          console.log('troca feita com sucesso!');
-        }).catch((err) => {
-          console.log('error ao tentar trocar de cateogria');
-        });
-    else 
-      client.say(channel, 'você não tem permissão!');
-  }
+
   if(message === 'just') {
-   
+    isMod(user['display-name'], adms, client);   
     client.action(channel, "!game Just Chatting")
       .then((data) => {
         console.log('troca feita com sucesso!');
@@ -76,29 +85,40 @@ client.on("chat", (channel, user, message, self) => {
         console.log('error ao tentar trocar de cateogria');
       });
   }
-  if(message === 'tira mod') {
-    client.unmod(channel, 'nightbot')
-      .then((data) => {
-        client.say(channel, "Retirado o mod do nightbot");
-      }).catch((err) => {
-        if(err === 'bad_unmod_mod') {
-          client.say(channel, "usuario não tem moderação");
-        }
-      });
-  }
+  
   // CONTATOS 
   if(message !== null){
+    
     switch(message) {
       case '!twitter':
-        client.action(channel, `${user['display-name']} https://twitter.com/Araujo_dev `);
-        break;
+        client.action(channel, `${user['display-name']} https://twitter.com/gabrieldarezzo `);
+      break;
+
       case '!github':
-        client.action(channel, `${user['display-name']} https://github.com/JailsonAraujo `);
-        break;
+        client.action(channel, `${user['display-name']} https://github.com/gabrieldarezzo`);
+      break;
+
       case '!email':
-        client.action(channel, `${user['display-name']} https://github.com/JailsonAraujo `);
-      default:
-        break;
+        client.action(channel, `${user['display-name']} darezzo.gabriel@gmail.com`);
+      break;
+
+      case '!specs':
+        client.action(channel, `${user['display-name']} i5, 8GB DE RAM, 1050-TI, 120 SSD (Em casa),`);
+      break;
+
+      case '!tema':
+        client.action(channel, `${user['display-name']} https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode`);
+      break;
+
+      case '!playlist':
+        // Pegar dinamicamente da API do Spotify?!
+        client.action(channel, `${user['display-name']} https://open.spotify.com/playlist/37i9dQZF1DXdfOcg1fm0VG?si=ARQSqAQLQY-kYniLwTkf-w`);
+      break;
+
+      case '!linkprojeto':        
+        client.action(channel, `${user['display-name']} https://github.com/JailsonAraujo/twitchbottwitch`);
+      break;
+
     }
   }
 })
