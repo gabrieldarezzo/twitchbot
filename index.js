@@ -3,6 +3,7 @@ var channel = "gabrieldarezzo"
 // seu codigo 
 // get yours at http://twitchapps.com/tmi
 var configGlobal = require("./password.js")
+var commands = require("./commands")
 
 var adms = [
   channel,  
@@ -55,7 +56,7 @@ client.on("chat", (channel, user, message, self) => {
   
 
   if(message === 'tt') {
-    console.log()
+    console.log(commands);
   }
 
   if(message === 'log') {
@@ -66,7 +67,7 @@ client.on("chat", (channel, user, message, self) => {
   }
 
 
-  if(message === 'sci') {
+  if(message === '!sci') {
     isMod(user['display-name'], adms, client);
     client.action(channel, "!game Science & Technology")
       .then((data) => {
@@ -76,7 +77,7 @@ client.on("chat", (channel, user, message, self) => {
       });
   }
 
-  if(message === 'just') {
+  if(message === '!just') {
     isMod(user['display-name'], adms, client);   
     client.action(channel, "!game Just Chatting")
       .then((data) => {
@@ -85,11 +86,29 @@ client.on("chat", (channel, user, message, self) => {
         console.log('error ao tentar trocar de cateogria');
       });
   }
+
+
+  if(message !== null) {
+
+    
+
+    if(typeof commands[message] !== 'undefined') {
+      const messageToDisplay = commands[message];
+      client.action(channel, `${user['display-name']} ${messageToDisplay}`);
+    }
+
+    
+  }
+
   
+  
+
+  /*
   // CONTATOS 
   if(message !== null){
     
     switch(message) {
+      
       case '!twitter':
         client.action(channel, `${user['display-name']} https://twitter.com/gabrieldarezzo `);
       break;
@@ -103,7 +122,7 @@ client.on("chat", (channel, user, message, self) => {
       break;
 
       case '!specs':
-        client.action(channel, `${user['display-name']} i5, 8GB DE RAM, 1050-TI, 120 SSD (Em casa),`);
+        client.action(channel, `${user['display-name']} i5, 8GB DE RAM, 1050-TI, 120 SSD`);
       break;
 
       case '!tema':
@@ -112,13 +131,14 @@ client.on("chat", (channel, user, message, self) => {
 
       case '!playlist':
         // Pegar dinamicamente da API do Spotify?!
-        client.action(channel, `${user['display-name']} https://open.spotify.com/playlist/37i9dQZF1DXdfOcg1fm0VG?si=ARQSqAQLQY-kYniLwTkf-w`);
+        client.action(channel, `${user['display-name']} https://www.youtube.com/watch?v=cSY5UF-ZCxw&list=RDEM4eZDs_u8lV1UARX7tj9AEw&index=18`);
       break;
 
       case '!linkprojeto':        
-        client.action(channel, `${user['display-name']} https://github.com/JailsonAraujo/twitchbottwitch`);
+        client.action(channel, `${user['display-name']} https://github.com/gabrieldarezzo/twitchbottwitch`);
       break;
 
     }
   }
+  */
 })
