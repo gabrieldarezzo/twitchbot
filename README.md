@@ -12,8 +12,9 @@ https://nodejs.org/en/download/
 
 Crie uma conta Bot no http://twitch.tv
 
-```shell
 Faça um clone do repositorio:
+```shell
+git clone https://github.com/gabrieldarezzo/twitchbot.git
 npm run start
 ```
 
@@ -50,14 +51,15 @@ Para isso apenas execute no chat:
 
 # Criar seus proprios comandos:
 Apenas adicione uma linha no arquivo `commands.js`: 
-```
+
+```json
 module.exports = {
-    '!twitter':'https://twitter.com/gabrieldarezzo',
-    '!github':'https://github.com/gabrieldarezzo',
-    '!email':'darezzo.gabriel@gmail.com',
-    '!specs':'i5, 8GB DE RAM, 1050-TI, 120 SSD',    
-    '!linkprojeto':'https://github.com/gabrieldarezzo/twitchbottwitch',
-    '!LINK_DO_COMANDO':'VALOR A SER EXIBIDO',
+    "!twitter":"https://twitter.com/gabrieldarezzo",
+    "!github":"https://github.com/gabrieldarezzo",
+    "!email":"darezzo.gabriel@gmail.com",
+    "!specs":"i5, 8GB DE RAM, 1050-TI, 120 SSD",    
+    "!linkprojeto":"https://github.com/gabrieldarezzo/twitchbottwitch",
+    "!LINK_DO_COMANDO":"VALOR A SER EXIBIDO",
 };
 ```  
 
