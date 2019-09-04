@@ -89,15 +89,10 @@ client.on("chat", (channel, user, message, self) => {
 
 
   if(message !== null) {
-
-    
-
     if(typeof commands[message] !== 'undefined') {
       const messageToDisplay = commands[message];
       client.action(channel, `${user['display-name']} ${messageToDisplay}`);
     }
-
-    
   }
 
   

@@ -7,5 +7,5 @@ module.exports = {
     
     // Pegar dinamicamente da API do Spotify?!
     '!playlist':'https://www.youtube.com/watch?v=cSY5UF-ZCxw&list=RDEM4eZDs_u8lV1UARX7tj9AEw&index=18',
-    '!linkprojeto':'https://github.com/gabrieldarezzo/twitchbottwitch',
+    '!linkprojeto':'https://github.com/gabrieldarezzo/twitchbot',
 };

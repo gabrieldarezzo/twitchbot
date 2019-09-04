@@ -18,16 +18,17 @@ git clone https://github.com/gabrieldarezzo/twitchbot.git
 npm run start
 ```
 
-Seria legal usar o NightBot junto.  
-https://docs.nightbot.tv/commands/commandlist  
-Assim possibilita comandos como:
-* Mudar o nome da Live
-* Muda a categoria
-* Muda o game  
+`index.js`  
+Altere o seu canal:
+```js
+var channel = "gabrieldarezzo"
 
-Para criar funcionalidades pode usar os comandos do of [tmi.js](https://github.com/tmijs/tmi.js):
-  
-https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Commands.md#mods
+// E adicione o seu bot como adm:
+var adms = [
+  channel,  
+  'darezzobot',  
+];
+```
 
 
 Você precisa criar um arquivo `password.js`:  
@@ -62,6 +63,22 @@ module.exports = {
     "!LINK_DO_COMANDO":"VALOR A SER EXIBIDO",
 };
 ```  
+
+
+## NightBot  
+Seria legal usar o NightBot junto.  
+https://docs.nightbot.tv/commands/commandlist  
+Assim possibilita comandos como:
+* Mudar o nome da Live -> !title
+* Muda a categoria / game 
+
+
+----
+
+Para criar funcionalidades pode usar os comandos do of [tmi.js](https://github.com/tmijs/tmi.js):
+  
+https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Commands.md#mods
+
 
 Comandos padrões da twitch:
 ```
